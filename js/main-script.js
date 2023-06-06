@@ -3,7 +3,7 @@
 //////////////////////
 
 var camera, scene, renderer;
-var moon, trunk, branch1, branch2;
+var moon, trunk, branch1, branch2, house, door, window, window1, window2, chimney, roof;
 var crowns = [];
 var shadingType = 'Gouraud';
 var isLightingEnabled = true;
@@ -17,6 +17,22 @@ const trunkToonMaterial = new THREE.MeshToonMaterial({ color: 0x8B4513 });
 const crownLambertMaterial = new THREE.MeshLambertMaterial({ color: 0x006400 });
 const crownPhongMaterial = new THREE.MeshPhongMaterial({ color: 0x006400 });
 const crownToonMaterial = new THREE.MeshToonMaterial({ color: 0x006400 });
+const houseLambertMaterial = new THREE.MeshLambertMaterial({ color: 0x8B4513 });
+const housePhongMaterial = new THREE.MeshPhongMaterial({ color: 0x8B4513 });
+const houseToonMaterial = new THREE.MeshToonMaterial({ color: 0x8B4513 });
+const doorLambertMaterial = new THREE.MeshLambertMaterial({ color: 0x000000 });
+const doorPhongMaterial = new THREE.MeshPhongMaterial({ color: 0x000000 });
+const doorToonMaterial = new THREE.MeshToonMaterial({ color: 0x000000 });
+const windowLambertMaterial = new THREE.MeshLambertMaterial({ color: 0x0000ff });
+const windowPhongMaterial = new THREE.MeshPhongMaterial({ color: 0x0000ff });
+const windowToonMaterial = new THREE.MeshToonMaterial({ color: 0x0000ff });
+const roofLambertMaterial = new THREE.MeshLambertMaterial({ color: 0x8B0000 });
+const roofPhongMaterial = new THREE.MeshPhongMaterial({ color: 0x8B0000 });
+const roofToonMaterial = new THREE.MeshToonMaterial({ color: 0x8B0000 });
+const chimneyLambertMaterial = new THREE.MeshLambertMaterial({ color: 0x8B0000 });
+const chimneyPhongMaterial = new THREE.MeshPhongMaterial({ color: 0x8B0000 });
+const chimneyToonMaterial = new THREE.MeshToonMaterial({ color: 0x8B0000 });
+
 
 /////////////////////
 /* CREATE SCENE(S) */
@@ -102,6 +118,35 @@ function createObjects() {
     branch2.rotation.z = -Math.PI / 4;
     branch2.rotation.x = -Math.PI / 4;
 
+    // Create house
+    var houseGeometry = new THREE.BoxGeometry(2, 2, 2);
+    house = new THREE.Mesh(houseGeometry, houseLambertMaterial);
+    house.position.set(0, 0, 0);
+
+    // Carve windows
+    var windowGeometry = new THREE.BoxGeometry(0.4, 0.4, 0.1);
+    window1 = new THREE.Mesh(windowGeometry, windowLambertMaterial);
+    window1.position.set(-0.6, 0.5, 1);
+    window2 = new THREE.Mesh(windowGeometry, windowLambertMaterial);
+    window2.position.set(0.6, 0.5, 1);
+
+     // Carve out a door
+    var doorGeometry = new THREE.BoxGeometry(0.6, 1, 0.1);
+    door = new THREE.Mesh(doorGeometry, doorLambertMaterial);
+    door.position.set(0, -0.5, 1);
+
+    // Create a chimney
+    var chimneyGeometry = new THREE.BoxGeometry(0.4, 0.4, 0.8);
+    chimney = new THREE.Mesh(chimneyGeometry, chimneyLambertMaterial);
+    chimney.position.set(-0.8, 1.2, -0.8);
+
+
+    // Create roof 
+    var roofGeometry = new THREE.ConeGeometry(2.2, 1, 4);
+    roof = new THREE.Mesh(roofGeometry, roofLambertMaterial);
+    roof.position.set(0, 1.5, 0);
+    roof.rotation.y = Math.PI / 4;
+
     // Create crown meshes
     for (var i = 0; i < 3; i++) {
         var crown = new THREE.Mesh(crownGeometries[i], crownLambertMaterial);
@@ -114,11 +159,16 @@ function createObjects() {
     scene.add(trunk);
     scene.add(branch1);
     scene.add(branch2);
+    scene.add(house);
+    scene.add(window1);
+    scene.add(window2);
+    scene.add(door);
+    scene.add(chimney);
+    scene.add(roof);
     for (var i = 0; i < 3; i++) {
         scene.add(crowns[i]);
     }
 }
-
 
 ////////////
 /* UPDATE */
