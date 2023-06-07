@@ -17,21 +17,21 @@ const trunkToonMaterial = new THREE.MeshToonMaterial({ color: 0x8B4513 });
 const crownLambertMaterial = new THREE.MeshLambertMaterial({ color: 0x006400 });
 const crownPhongMaterial = new THREE.MeshPhongMaterial({ color: 0x006400 });
 const crownToonMaterial = new THREE.MeshToonMaterial({ color: 0x006400 });
-const houseLambertMaterial = new THREE.MeshLambertMaterial({ color: 0x8B4513 });
-const housePhongMaterial = new THREE.MeshPhongMaterial({ color: 0x8B4513 });
-const houseToonMaterial = new THREE.MeshToonMaterial({ color: 0x8B4513 });
-const doorLambertMaterial = new THREE.MeshLambertMaterial({ color: 0x000000 });
-const doorPhongMaterial = new THREE.MeshPhongMaterial({ color: 0x000000 });
-const doorToonMaterial = new THREE.MeshToonMaterial({ color: 0x000000 });
+const houseLambertMaterial = new THREE.MeshLambertMaterial({ color: 0xffffff });
+const housePhongMaterial = new THREE.MeshPhongMaterial({ color: 0xffffff });
+const houseToonMaterial = new THREE.MeshToonMaterial({ color: 0xffffff });
+const doorLambertMaterial = new THREE.MeshLambertMaterial({ color: 0x8B4513 });
+const doorPhongMaterial = new THREE.MeshPhongMaterial({ color: 0x8B4513 });
+const doorToonMaterial = new THREE.MeshToonMaterial({ color: 0x8B4513 });
 const windowLambertMaterial = new THREE.MeshLambertMaterial({ color: 0x0000ff });
 const windowPhongMaterial = new THREE.MeshPhongMaterial({ color: 0x0000ff });
 const windowToonMaterial = new THREE.MeshToonMaterial({ color: 0x0000ff });
 const roofLambertMaterial = new THREE.MeshLambertMaterial({ color: 0x8B0000 });
 const roofPhongMaterial = new THREE.MeshPhongMaterial({ color: 0x8B0000 });
 const roofToonMaterial = new THREE.MeshToonMaterial({ color: 0x8B0000 });
-const chimneyLambertMaterial = new THREE.MeshLambertMaterial({ color: 0x8B0000 });
-const chimneyPhongMaterial = new THREE.MeshPhongMaterial({ color: 0x8B0000 });
-const chimneyToonMaterial = new THREE.MeshToonMaterial({ color: 0x8B0000 });
+const chimneyLambertMaterial = new THREE.MeshLambertMaterial({ color: 0xffffff });
+const chimneyPhongMaterial = new THREE.MeshPhongMaterial({ color: 0xffffff });
+const chimneyToonMaterial = new THREE.MeshToonMaterial({ color: 0xffffff });
 
 
 /////////////////////
@@ -52,7 +52,8 @@ function createScene(){
 //////////////////////
 function createCamera() {
     'use strict';
-    camera = new THREE.OrthographicCamera(-window.innerWidth / 10, window.innerWidth / 10, window.innerHeight / 10, -window.innerHeight / 10, 0.1, 1000);
+    var aspectRatio = window.innerWidth / window.innerHeight;
+    camera = new THREE.OrthographicCamera(-10 * aspectRatio, 10 * aspectRatio, 10, -10, 0, 10);
     camera.position.set(0, 0, 5);
     camera.lookAt(0, 0, 0);
 }
@@ -136,9 +137,9 @@ function createObjects() {
     door.position.set(0, -0.5, 1);
 
     // Create a chimney
-    var chimneyGeometry = new THREE.BoxGeometry(0.4, 0.4, 0.8);
+    var chimneyGeometry = new THREE.BoxGeometry(0.4, 0.5, 0.8);
     chimney = new THREE.Mesh(chimneyGeometry, chimneyLambertMaterial);
-    chimney.position.set(-0.8, 1.2, -0.8);
+    chimney.position.set(-0.6, 1.5, 0.8);
 
 
     // Create roof 
@@ -302,6 +303,11 @@ function setShadingType() {
             trunk.material = trunkLambertMaterial;
             branch1.material = trunkLambertMaterial;
             branch2.material = trunkLambertMaterial;
+            house.material = houseLambertMaterial;
+            window1.material = windowLambertMaterial;
+            window2.material = windowLambertMaterial;
+            door.material = doorLambertMaterial;
+            roof.material = roofLambertMaterial;
             for (var i = 0; i < 3; i++) {
                 crowns[i].material = crownLambertMaterial;
             }
@@ -311,6 +317,11 @@ function setShadingType() {
             trunk.material = trunkPhongMaterial;
             branch1.material = trunkPhongMaterial;
             branch2.material = trunkPhongMaterial;
+            house.material = houseLambertMaterial;
+            window1.material = windowLambertMaterial;
+            window2.material = windowLambertMaterial;
+            door.material = doorLambertMaterial;
+            roof.material = roofLambertMaterial;
             for (var i = 0; i < 3; i++) {
                 crowns[i].material = crownPhongMaterial;
             }
@@ -320,6 +331,11 @@ function setShadingType() {
             trunk.material = trunkToonMaterial;
             branch1.material = trunkToonMaterial;
             branch2.material = trunkToonMaterial;
+            house.material = houseLambertMaterial;
+            window1.material = windowLambertMaterial;
+            window2.material = windowLambertMaterial;
+            door.material = doorLambertMaterial;
+            roof.material = roofLambertMaterial;
             for (var i = 0; i < 3; i++) {
                 crowns[i].material = crownToonMaterial;
             }
